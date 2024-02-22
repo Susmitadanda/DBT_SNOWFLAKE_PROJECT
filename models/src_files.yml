@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: landing
+    database: my_db  
+    schema: raw_data 
+    freshness: 
+      warn_after:
+        count: 1
+        period: day
+      error_after:
+        count: 2
+        period: day
+    loaded_at_field: updated_at
+    tables:
+      - name: orders
+        identifier: orders
+        description: Source Order table from Snowflake
+        columns:
+          - name: orderid
+            description: Primary key in orders table
+            tests:
+              - unique
+              - not_null
+                  
+      - name: customer
+        identifier: customer
+        description: Source Customer table from Snowflake
+        columns:
+          - name: customerid
+            description: Primary key in customer table
+            tests:
+              - unique
+              - not_null
+      - name: sales_us
+        identifier: sales_us
+        
+
+

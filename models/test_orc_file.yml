@@ -1,0 +1,25 @@
+models:
+  - name: customer_stg
+    columns:
+      - name: email
+        description: Customer email address cannot be empty
+        tests:
+          - column_not_empty #named generic tests
+  - name: orders_stg
+    columns:
+      - name: orderid
+        tests:
+          - not_null #built in generic tests
+          - unique
+          - relationships:
+              to: ref('customers_stg')
+              field: customerid
+      - name: statuscd
+        description: '{{ doc("StatusCD") }}'
+        tests:
+          - accepted_values:
+              values:
+                - "P"
+                - "O"
+                - "F"
+     

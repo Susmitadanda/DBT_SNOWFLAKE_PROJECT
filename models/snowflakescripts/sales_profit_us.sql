@@ -1,0 +1,1 @@
+{{ generate_profit_sales_model('sales_us')}}
